@@ -34,8 +34,24 @@ class FirebaseAuthRepo implements AuthRepo {
     String name,
     String email,
     String password,
-  ) {
-    throw UnimplementedError();
+  ) async {
+    try {
+      UserCredential userCredential =
+          await firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      AppUser user = AppUser(
+        uid: userCredential.user!.uid,
+        email: userCredential.user!.email!,
+        name: name,
+      );
+
+      return user;
+    } catch (e) {
+      throw Exception('Login failed: $e');
+    }
   }
 
   @override
