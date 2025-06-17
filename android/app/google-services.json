@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "242003220068",
+    "project_id": "fake-insta-d480d",
+    "storage_bucket": "fake-insta-d480d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:242003220068:android:91c9581ba3a21e4c9cf171",
+        "android_client_info": {
+          "package_name": "com.example.fake_instagram"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-ihsA2613kje6L1sl4GSYjwLAy1euH8w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
