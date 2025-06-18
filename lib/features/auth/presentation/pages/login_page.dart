@@ -1,3 +1,4 @@
+import 'package:fake_instagram/features/auth/presentation/components/my_button.dart';
 import 'package:fake_instagram/features/auth/presentation/components/my_text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +21,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
                   Icons.lock_open_rounded,
@@ -45,6 +47,15 @@ class _LoginPageState extends State<LoginPage> {
                   controller: passwordController,
                   hintText: 'Password',
                   obscureText: true,
+                ),
+                const SizedBox(height: 25),
+                MyButton(onTap: () {}, text: 'Log in'),
+                const SizedBox(height: 50),
+                Text(
+                  'Not a member? Register now',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
               ],
             ),
