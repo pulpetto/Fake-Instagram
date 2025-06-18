@@ -2,6 +2,7 @@ import 'package:fake_instagram/features/auth/data/firebase_auth_repo.dart';
 import 'package:fake_instagram/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:fake_instagram/features/auth/presentation/cubits/auth_states.dart';
 import 'package:fake_instagram/features/auth/presentation/pages/auth_page.dart';
+import 'package:fake_instagram/features/post/presentation/pages/home_page.dart';
 import 'package:fake_instagram/themes/light_mode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
