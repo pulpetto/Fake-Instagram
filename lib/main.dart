@@ -1,4 +1,4 @@
-import 'package:fake_instagram/features/auth/presentation/pages/login_page.dart';
+import 'package:fake_instagram/features/auth/presentation/pages/auth_page.dart';
 import 'package:fake_instagram/firebase_options.dart';
 import 'package:fake_instagram/themes/light_mode.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: lightMode,
-      home: LoginPage(),
+      home: AuthPage(),
     );
   }
 }

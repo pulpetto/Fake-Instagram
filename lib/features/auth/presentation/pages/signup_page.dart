@@ -3,7 +3,8 @@ import 'package:fake_instagram/features/auth/presentation/components/my_text_fie
 import 'package:flutter/material.dart';
 
 class SignupPage extends StatefulWidget {
-  const SignupPage({super.key});
+  final void Function()? togglePages;
+  const SignupPage({super.key, required this.togglePages});
 
   @override
   State<SignupPage> createState() => _SignupPageState();
@@ -65,11 +66,27 @@ class _SignupPageState extends State<SignupPage> {
                 const SizedBox(height: 25),
                 MyButton(onTap: () {}, text: 'Sign up'),
                 const SizedBox(height: 50),
-                Text(
-                  'Already have an account? Login now',
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Already have an account?',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    const SizedBox(width: 5),
+                    GestureDetector(
+                      onTap: widget.togglePages,
+                      child: Text(
+                        'Login now',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
