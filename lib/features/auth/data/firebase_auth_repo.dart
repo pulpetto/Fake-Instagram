@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fake_instagram/features/auth/domain/entities/app_user.dart';
 import 'package:fake_instagram/features/auth/domain/repos/auth_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseAuthRepo implements AuthRepo {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
   Future<AppUser?> signInWithEmailAndPassword(
@@ -47,6 +49,8 @@ class FirebaseAuthRepo implements AuthRepo {
         email: userCredential.user!.email!,
         name: name,
       );
+
+      await firestore.collection('users').doc(user.uid).set(user.toJson());
 
       return user;
     } catch (e) {
