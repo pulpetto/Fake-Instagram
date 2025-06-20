@@ -1,5 +1,6 @@
 import 'package:fake_instagram/features/auth/domain/entities/app_user.dart';
 import 'package:fake_instagram/features/auth/presentation/cubits/auth_cubit.dart';
+import 'package:fake_instagram/features/profile/presentation/components/bio_box.dart';
 import 'package:fake_instagram/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:fake_instagram/features/profile/presentation/cubit/profile_states.dart';
 import 'package:flutter/material.dart';
@@ -75,16 +76,34 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                     const SizedBox(height: 25),
-                    Row(
-                      children: [
-                        Text(
-                          "Bio",
-                          style: TextStyle(
-                            color: Theme.of(context).colorScheme.primary,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 25.0),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Bio",
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
                           ),
-                        ),
-                      ],
-                    )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    BioBox(bio: user.bio!),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 25.0, top: 25.0),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Posts",
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
