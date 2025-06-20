@@ -1,10 +1,14 @@
 import 'package:fake_instagram/features/auth/domain/entities/app_user.dart';
 import 'package:fake_instagram/features/auth/presentation/cubits/auth_cubit.dart';
+import 'package:fake_instagram/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:fake_instagram/features/profile/presentation/cubit/profile_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  final String uid;
+
+  const ProfilePage({super.key, required this.uid});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -12,16 +16,88 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   late final authCubit = context.read<AuthCubit>();
+  late final profileCubit = context.read<ProfileCubit>();
 
   late AppUser? currentUser = authCubit.currentUser;
 
   @override
+  void initState() {
+    super.initState();
+
+    profileCubit.fetchUserProfile(widget.uid);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(currentUser!.email),
-      ),
+    return BlocBuilder<ProfileCubit, ProfileState>(
+      builder: (context, state) {
+        if (state is ProfileLoading) {
+          return const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        } else if (state is ProfileLoaded) {
+          final user = state.profile;
+
+          return Scaffold(
+            appBar: AppBar(
+              centerTitle: true,
+              title: Text(user.name),
+              foregroundColor: Theme.of(context).colorScheme.primary,
+            ),
+            body: Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                child: Column(
+                  children: [
+                    Text(
+                      user.email,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    const SizedBox(height: 25),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.secondary,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      height: 120,
+                      width: 120,
+                      padding: EdgeInsets.all(10),
+                      child: Center(
+                        child: Icon(
+                          Icons.person,
+                          size: 72,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 25),
+                    Row(
+                      children: [
+                        Text(
+                          "Bio",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+          );
+        } else {
+          return const Scaffold(
+            body: Center(
+              child: Text("No profile found"),
+            ),
+          );
+        }
+      },
     );
   }
 }
