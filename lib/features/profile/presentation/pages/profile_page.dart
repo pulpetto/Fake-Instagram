@@ -3,6 +3,7 @@ import 'package:fake_instagram/features/auth/presentation/cubits/auth_cubit.dart
 import 'package:fake_instagram/features/profile/presentation/components/bio_box.dart';
 import 'package:fake_instagram/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:fake_instagram/features/profile/presentation/cubit/profile_states.dart';
+import 'package:fake_instagram/features/profile/presentation/pages/edit_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -46,6 +47,19 @@ class _ProfilePageState extends State<ProfilePage> {
               centerTitle: true,
               title: Text(user.name),
               foregroundColor: Theme.of(context).colorScheme.primary,
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfilePage(user: user),
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.settings),
+                ),
+              ],
             ),
             body: Center(
               child: Padding(
